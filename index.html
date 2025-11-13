@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>윤동준 포트폴리오</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .contact-btn {
+            background: #667eea;
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 25px;
+            transition: background 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #5568d3;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 100px 20px 80px;
+        }
+
+        .hero-content h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: transform 0.3s ease;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Section Styles */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 50px;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5em;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .about-text p {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: #f8f9fa;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: white;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .project-card .project-period {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .project-card .project-description {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .project-features {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .project-features h4 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .project-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .project-features li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+            color: #555;
+        }
+
+        .project-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .project-achievements {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #ffc107;
+        }
+
+        .project-achievements h4 {
+            color: #856404;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact h2::after {
+            background: white;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 18px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            color: #667eea;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5em;
+            }
+
+            .hero-content p {
+                font-size: 1.2em;
+            }
+
+            .nav-container {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-image {
+                margin: 0 auto;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .project-card {
+                padding: 30px 20px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">YoonDev</div>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact" class="contact-btn">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>윤동준</h1>
+            <p>생성형 AI를 활용한 혁신적인 개발자</p>
+            <a href="#projects" class="hero-btn">프로젝트 상세 보기</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <div class="profile-image">윤</div>
+            <div class="about-text">
+                <p>
+                    안녕하세요! 생성형 AI 기술에 관심이 많은 개발자 윤동준입니다. 
+                </p>
+                <p>
+                    저는 비즈니스 문제를 기술로 해결하는 것을 좋아합니다. 복잡한 요구사항을 명확하게 이해하고, 
+                    최신 기술 스택을 활용하여 사용자 중심의 서비스를 개발합니다.
+                </p>
+                <p>
+                    특히 이 프로젝트에서 사용한 <strong>Gemini AI</strong>와 <strong>TMDB API</strong>를 활용하여 
+                    자연어로 대화하며 영화를 추천받는 시스템을 만들었고, JSP 팀 프로젝트에서는 
+                    <strong>게임 데이터 API</strong>를 연동하여 실시간 정보를 제공하는 웹사이트를 구축했습니다.
+                </p>
+                <p>
+                    <strong>동양미래대학교 컴퓨터소프트웨어공학과</strong>에서 웹 개발과 AI 기술을 공부하고 있습니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2>Skills</h2>
+        <div class="skill-grid">
+            <div class="skill-item">Java</div>
+            <div class="skill-item">Spring Boot</div>
+            <div class="skill-item">JSP/Servlet</div>
+            <div class="skill-item">JavaScript</div>
+            <div class="skill-item">HTML/CSS</div>
+            <div class="skill-item">React</div>
+            <div class="skill-item">MySQL</div>
+            <div class="skill-item">MS-SQL</div>
+            <div class="skill-item">Gemini AI</div>
+            <div class="skill-item">TMDB API</div>
+            <div class="skill-item">Git</div>
+            <div class="skill-item">IntelliJ IDEA</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <h2>Projects</h2>
+
+            <!-- Project 1: MovieTalk -->
+            <div class="project-card">
+                <h3>🎬 MovieTalk - AI 영화 추천 시스템</h3>
+                <div class="project-period">2024.11 ~ 현재 진행중</div>
+                <div class="project-description">
+                    사용자의 자연어 질문을 이해하고, Gemini AI와 TMDB API를 활용하여 
+                    최적의 영화를 추천하는 대화형 영화 추천 시스템입니다. 
+                    단순 키워드 매칭이 아닌, AI가 사용자의 취향과 맥락을 이해하여 
+                    개인화된 추천을 제공합니다.
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">Spring Boot</span>
+                    <span class="tech-tag">Gemini AI</span>
+                    <span class="tech-tag">TMDB API</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                </div>
+
+                <div class="project-features">
+                    <h4>주요 기능</h4>
+                    <ul>
+                        <li>자연어 기반 영화 검색 ("가족과 볼 수 있는 따뜻한 애니메이션")</li>
+                        <li>AI가 장르, 키워드, 평점을 종합 분석하여 최적의 영화 추천</li>
+                        <li>대화 맥락 기억 기능 ("코미디 빼줘" 등 후속 요청 처리)</li>
+                        <li>TMDB API 연동으로 20,000개 이상의 영화 데이터베이스 활용</li>
+                        <li>추천 이유를 상세히 설명하는 AI 기반 설명 기능</li>
+                        <li>영화 포스터, 줄거리, 평점 등 상세 정보 제공</li>
+                    </ul>
+                </div>
+
+                <div class="project-achievements">
+                    <h4>🏆 성과 및 기술적 성취</h4>
+                    <ul>
+                        <li>5단계 AI 추천 알고리즘 설계 (분석 → 검색 → 필터링 → 선택 → 설명)</li>
+                        <li>Gemini AI를 활용한 자연어 처리 정확도 향상</li>
+                        <li>대화 세션 관리 시스템 구현으로 연속적인 대화 지원</li>
+                        <li>RESTful API 설계 및 구현</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Project 2: Arknights Helper -->
+            <div class="project-card">
+                <h3>🎮 명일방주 게임 도우미 웹사이트</h3>
+                <div class="project-period">2024.09 ~ 2024.12 (팀 프로젝트)</div>
+                <div class="project-description">
+                    명일방주 게임 플레이어를 위한 종합 정보 및 계산 도구를 제공하는 웹사이트입니다. 
+                    게임 내 복잡한 계산을 자동화하고, 외부 API를 연동하여 
+                    실시간 게임 데이터를 제공합니다.
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">JSP & Servlet</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">MS-SQL</span>
+                    <span class="tech-tag">외부 API 연동</span>
+                </div>
+
+                <div class="project-features">
+                    <h4>주요 기능</h4>
+                    <ul>
+                        <li>공개모집 태그 조합 계산기 - 최적의 오퍼레이터 조합 추천</li>
+                        <li>레벨링 계산기 - 필요한 경험치와 자원 자동 계산</li>
+                        <li>재료 계산기 - 육성에 필요한 재료 목록 자동 생성</li>
+                        <li>스테이지별 아이템 드롭률 정보 제공 (외부 API 연동)</li>
+                        <li>회원 관리 시스템 (로그인, 회원가입, 정보 수정)</li>
+                        <li>커뮤니티 게시판 기능</li>
+                    </ul>
+                </div>
+
+                <div class="project-achievements">
+                    <h4>🏆 성과 및 기술적 성취</h4>
+                    <ul>
+                        <li>MVC 패턴 기반 웹 애플리케이션 설계 및 구현</li>
+                        <li>데이터베이스 설계 및 최적화 (MS-SQL)</li>
+                        <li>외부 게임 데이터 API 연동 및 파싱</li>
+                        <li>반응형 웹 디자인 적용</li>
+                        <li>팀 프로젝트 협업 경험 (Git을 통한 버전 관리)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Contact</h2>
+        <div class="contact-links">
+            <a href="https://github.com/yourusername" class="contact-link" target="_blank">GitHub</a>
+            <a href="mailto:your.email@example.com" class="contact-link">Email</a>
+            <a href="https://padlet.com/sunheehwang2/ai-t1z03c04rb6lfv3t" class="contact-link" target="_blank">세미나 제출</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 윤동준 포트폴리오. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('navLinks');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Add active state to nav links on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
