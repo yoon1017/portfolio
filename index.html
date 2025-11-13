@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>윤동준 포트폴리오</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         * {
             margin: 0;
@@ -19,32 +20,30 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
-            background: #f8f9fa;
         }
 
-        /* Navigation Bar */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-            padding: 0;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 20px 50px;
         }
 
         .logo {
-            font-size: 1.5em;
+            font-size: 1.8em;
             font-weight: bold;
             color: #667eea;
         }
@@ -52,321 +51,89 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 40px;
         }
 
         .nav-links a {
             text-decoration: none;
             color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1em;
+            padding: 8px 20px;
+            border-radius: 8px;
+            transition: background 0.2s ease, color 0.2s ease;
         }
 
         .nav-links a:hover {
+            background: #f0f0f0;
             color: #667eea;
         }
 
-        .contact-btn {
-            background: #667eea;
-            color: white !important;
-            padding: 10px 25px;
-            border-radius: 25px;
-            transition: background 0.3s ease;
+        .nav-links a.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
         }
 
-        .contact-btn:hover {
-            background: #5568d3;
-        }
-
-        /* Hero Section */
-        .hero {
+        /* Sections */
+        section {
             min-height: 100vh;
+            padding: 100px 50px;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .section-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        /* Home Section */
+        #home {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             text-align: center;
-            padding: 100px 20px 80px;
         }
 
-        .hero-content h1 {
-            font-size: 4em;
+        #home h1 {
+            font-size: 5em;
             margin-bottom: 20px;
             animation: fadeInDown 1s ease;
         }
 
-        .hero-content p {
-            font-size: 1.5em;
-            margin-bottom: 40px;
+        #home .subtitle {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            opacity: 0.95;
             animation: fadeInUp 1s ease;
         }
 
-        .hero-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: transform 0.3s ease;
+        #home .university {
+            font-size: 1.3em;
+            margin-bottom: 50px;
+            opacity: 0.9;
             animation: fadeInUp 1.2s ease;
         }
 
-        .hero-btn:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Section Styles */
-        section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 100px 40px;
-        }
-
-        section h2 {
-            font-size: 2.5em;
-            color: #333;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-            padding-bottom: 20px;
-        }
-
-        section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about {
-            background: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 50px;
-            align-items: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .profile-image {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5em;
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .about-text p {
-            font-size: 1.1em;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* Skills Section */
-        .skills {
-            background: #f8f9fa;
-        }
-
-        .skill-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .skill-item {
-            background: white;
-            padding: 30px 20px;
-            border-radius: 15px;
-            text-align: center;
-            font-weight: bold;
-            color: #667eea;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        /* Projects Section */
-        .projects {
-            background: white;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 20px;
-            padding: 50px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
-            border-color: #667eea;
-        }
-
-        .project-card h3 {
-            color: #667eea;
+        .scroll-down {
+            margin-top: 50px;
             font-size: 2em;
-            margin-bottom: 15px;
+            opacity: 0.8;
+            animation: bounce 2s infinite;
         }
 
-        .project-card .project-period {
-            color: #888;
-            font-style: italic;
-            margin-bottom: 20px;
-            font-size: 0.95em;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
         }
 
-        .project-card .project-description {
-            font-size: 1.1em;
-            color: #555;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 25px 0;
-        }
-
-        .tech-tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 0.9em;
-            font-weight: 600;
-        }
-
-        .project-features {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 25px 0;
-        }
-
-        .project-features h4 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-        }
-
-        .project-features ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .project-features li {
-            padding: 10px 0;
-            padding-left: 30px;
-            position: relative;
-            font-size: 1.05em;
-            color: #555;
-        }
-
-        .project-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .project-achievements {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin: 25px 0;
-            border-left: 5px solid #ffc107;
-        }
-
-        .project-achievements h4 {
-            color: #856404;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-        }
-
-        .contact h2 {
-            color: white;
-        }
-
-        .contact h2::after {
-            background: white;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            display: inline-block;
-            padding: 18px 40px;
-            background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: all 0.3s ease;
-        }
-
-        .contact-link:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
-        }
-
-        /* Footer */
-        footer {
-            background: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 30px 20px;
-        }
-
-        /* Animations */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -389,28 +156,259 @@
             }
         }
 
+        /* About Section */
+        #about {
+            background: white;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6em;
+            color: white;
+            font-weight: bold;
+            margin: 0 auto;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .profile-name {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            font-size: 1.3em;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .about-text h2 {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            font-size: 1.15em;
+            color: #555;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .about-text strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: #f8f9fa;
+        }
+
+        #skills h2 {
+            font-size: 3.5em;
+            color: #333;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.2em;
+            color: #667eea;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Projects Section */
+        #projects {
+            background: white;
+            min-height: auto;
+            padding: 100px 50px;
+        }
+
+        #projects h2 {
+            font-size: 3.5em;
+            color: #333;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .project-card {
+            background: #f8f9fa;
+            border-radius: 25px;
+            padding: 60px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 3px solid transparent;
+        }
+
+        .project-card h3 {
+            font-size: 2.3em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .project-period {
+            color: #888;
+            font-style: italic;
+            margin-bottom: 25px;
+            font-size: 1.05em;
+        }
+
+        .project-description {
+            font-size: 1.15em;
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 600;
+        }
+
+        .project-section {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .project-section h4 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .project-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .project-section li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            font-size: 1.08em;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .project-section li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .achievements {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+            border-left-color: #ffc107;
+        }
+
+        .achievements h4 {
+            color: #856404;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        #contact h2 {
+            font-size: 4em;
+            margin-bottom: 30px;
+        }
+
+        #contact p {
+            font-size: 1.5em;
+            margin-bottom: 50px;
+            opacity: 0.95;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 20px 50px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.3em;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .contact-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+
         /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            font-size: 1.5em;
+            font-size: 1.8em;
             color: #667eea;
             cursor: pointer;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5em;
-            }
-
-            .hero-content p {
-                font-size: 1.2em;
-            }
-
+        @media (max-width: 968px) {
             .nav-container {
-                padding: 15px 20px;
+                padding: 15px 25px;
             }
 
             .nav-links {
@@ -422,7 +420,8 @@
                 background: white;
                 flex-direction: column;
                 padding: 20px;
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                gap: 10px;
             }
 
             .nav-links.active {
@@ -433,26 +432,26 @@
                 display: block;
             }
 
-            .about-content {
+            #home h1 {
+                font-size: 3em;
+            }
+
+            .about-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .profile-image {
-                margin: 0 auto;
-            }
-
-            section {
-                padding: 60px 20px;
+                gap: 40px;
             }
 
             .project-card {
-                padding: 30px 20px;
+                padding: 30px;
             }
 
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
+            section {
+                padding: 80px 20px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 20px;
             }
         }
     </style>
@@ -464,121 +463,199 @@
             <div class="logo">YoonDev</div>
             <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
             <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact" class="contact-btn">Contact</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content">
+    <!-- Home Section -->
+    <section id="home">
+        <div class="section-content">
             <h1>윤동준</h1>
-            <p>생성형 AI를 활용한 혁신적인 개발자</p>
-            <a href="#projects" class="hero-btn">프로젝트 상세 보기</a>
+            <p class="subtitle">생성형 AI를 활용한 혁신적인 개발자</p>
+            <p class="university">동양미래대학교 컴퓨터소프트웨어공학과</p>
+            <div class="scroll-down">↓</div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
-        <h2>About Me</h2>
-        <div class="about-content">
-            <div class="profile-image">윤</div>
-            <div class="about-text">
-                <p>
-                    안녕하세요! 생성형 AI 기술에 관심이 많은 개발자 윤동준입니다. 
-                </p>
-                <p>
-                    저는 비즈니스 문제를 기술로 해결하는 것을 좋아합니다. 복잡한 요구사항을 명확하게 이해하고, 
-                    최신 기술 스택을 활용하여 사용자 중심의 서비스를 개발합니다.
-                </p>
-                <p>
-                    특히 이 프로젝트에서 사용한 <strong>Gemini AI</strong>와 <strong>TMDB API</strong>를 활용하여 
-                    자연어로 대화하며 영화를 추천받는 시스템을 만들었고, JSP 팀 프로젝트에서는 
-                    <strong>게임 데이터 API</strong>를 연동하여 실시간 정보를 제공하는 웹사이트를 구축했습니다.
-                </p>
-                <p>
-                    <strong>동양미래대학교 컴퓨터소프트웨어공학과</strong>에서 웹 개발과 AI 기술을 공부하고 있습니다.
-                </p>
+    <section id="about">
+        <div class="section-content">
+            <div class="about-grid">
+                <div>
+                    <div class="profile-image">윤</div>
+                    <div class="profile-info">
+                        <div class="profile-name">윤동준</div>
+                        <div class="profile-title">Developer</div>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>
+                        안녕하세요! <strong>생성형 AI를 활용하여 사용자 경험을 혁신하는 개발자</strong> 윤동준입니다.
+                    </p>
+                    <p>
+                        저는 단순히 기술을 구현하는 것을 넘어, <strong>사용자의 실제 문제를 해결하는 서비스</strong>를 만드는 것에 열정을 가지고 있습니다. 
+                        "왜 이 기능이 필요한가?"를 항상 고민하며, 기술이 사람들의 일상에 자연스럽게 녹아들 수 있는 방법을 모색합니다.
+                    </p>
+                    <p>
+                        특히 <strong>Gemini AI와 TMDB API</strong>를 활용한 MovieTalk 프로젝트에서는 
+                        "영화 선택의 피로감"이라는 일상적인 문제를 AI 대화를 통해 해결했습니다. 
+                        사용자가 자연어로 취향을 표현하면, AI가 이를 이해하고 최적의 영화를 추천하는 
+                        <strong>1인 개발 프로젝트</strong>를 완성했습니다.
+                    </p>
+                    <p>
+                        또한 JSP 팀 프로젝트에서는 <strong>명일방주 게임 도우미 웹사이트</strong>를 개발하며 
+                        외부 API 연동, 데이터베이스 설계, 팀 협업 경험을 쌓았습니다.
+                    </p>
+                    <p>
+                        <strong>동양미래대학교 컴퓨터소프트웨어공학과</strong>에서 웹 개발과 AI 기술을 공부하고 있으며,
+                        배운 기술을 실제 프로젝트에 적용하며 성장하는 개발자가 되고자 합니다.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="skills" id="skills">
-        <h2>Skills</h2>
-        <div class="skill-grid">
-            <div class="skill-item">Java</div>
-            <div class="skill-item">Spring Boot</div>
-            <div class="skill-item">JSP/Servlet</div>
-            <div class="skill-item">JavaScript</div>
-            <div class="skill-item">HTML/CSS</div>
-            <div class="skill-item">React</div>
-            <div class="skill-item">MySQL</div>
-            <div class="skill-item">MS-SQL</div>
-            <div class="skill-item">Gemini AI</div>
-            <div class="skill-item">TMDB API</div>
-            <div class="skill-item">Git</div>
-            <div class="skill-item">IntelliJ IDEA</div>
+    <section id="skills">
+        <div class="section-content">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">Java</div>
+                <div class="skill-card">Spring Boot</div>
+                <div class="skill-card">JSP/Servlet</div>
+                <div class="skill-card">JavaScript</div>
+                <div class="skill-card">HTML/CSS</div>
+                <div class="skill-card">React</div>
+                <div class="skill-card">MySQL</div>
+                <div class="skill-card">MS-SQL</div>
+                <div class="skill-card">Gemini AI</div>
+                <div class="skill-card">TMDB API</div>
+                <div class="skill-card">Git</div>
+                <div class="skill-card">IntelliJ IDEA</div>
+            </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section class="projects" id="projects">
-        <h2>Projects</h2>
+    <section id="projects">
+        <div class="section-content">
+            <h2>Projects</h2>
 
             <!-- Project 1: MovieTalk -->
             <div class="project-card">
-                <h3>🎬 MovieTalk - AI 영화 추천 시스템</h3>
-                <div class="project-period">2024.11 ~ 현재 진행중</div>
+                <h3><i data-lucide="film" style="display: inline-block; width: 32px; height: 32px; vertical-align: middle; margin-right: 8px;"></i>MovieTalk - AI 영화 추천 시스템</h3>
+                <div class="project-period">2024.11 ~ 현재 진행중 | 1인 개발</div>
+                
                 <div class="project-description">
-                    사용자의 자연어 질문을 이해하고, Gemini AI와 TMDB API를 활용하여 
-                    최적의 영화를 추천하는 대화형 영화 추천 시스템입니다. 
-                    단순 키워드 매칭이 아닌, AI가 사용자의 취향과 맥락을 이해하여 
-                    개인화된 추천을 제공합니다.
+                    <strong>"우리의 영화 찾기는 왜 어려운가?"</strong><br><br>
+                    수많은 OTT 서비스와 영화 속에서 내 취향에 딱 맞는 작품을 찾는 건 너무나 어려운 일입니다. 
+                    단순 검색과 필터만으로는 미묘한 감성과 분위기까지 찾아낼 수 없습니다.<br><br>
+                    MovieTalk은 <strong>자연어 대화를 통해 사용자의 취향을 이해하고, 
+                    AI가 최적의 영화를 추천하는 대화형 영화 추천 시스템</strong>입니다.
                 </div>
 
                 <div class="tech-stack">
                     <span class="tech-tag">Spring Boot</span>
-                    <span class="tech-tag">Gemini AI</span>
+                    <span class="tech-tag">Gemini AI (LLM API)</span>
                     <span class="tech-tag">TMDB API</span>
                     <span class="tech-tag">JavaScript</span>
                     <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">RESTful API</span>
                 </div>
 
-                <div class="project-features">
-                    <h4>주요 기능</h4>
+                <div class="project-section">
+                    <h4><i data-lucide="lightbulb" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>해결하고자 한 문제</h4>
                     <ul>
-                        <li>자연어 기반 영화 검색 ("가족과 볼 수 있는 따뜻한 애니메이션")</li>
-                        <li>AI가 장르, 키워드, 평점을 종합 분석하여 최적의 영화 추천</li>
-                        <li>대화 맥락 기억 기능 ("코미디 빼줘" 등 후속 요청 처리)</li>
-                        <li>TMDB API 연동으로 20,000개 이상의 영화 데이터베이스 활용</li>
-                        <li>추천 이유를 상세히 설명하는 AI 기반 설명 기능</li>
-                        <li>영화 포스터, 줄거리, 평점 등 상세 정보 제공</li>
+                        <li><strong>정보의 홍수</strong>: 어떤 영화를 봐야 할지 선택하기 위한 탐색 과정의 피로감</li>
+                        <li><strong>취향 표현의 한계</strong>: "감성적", "긴장감 있는" 등 키워드로는 설명하기 힘든 복합적인 취향</li>
+                        <li><strong>소통의 부재</strong>: 왜 이 영화가 추천되었는지 알 수 없는 일방적인 알고리즘</li>
                     </ul>
                 </div>
 
-                <div class="project-achievements">
-                    <h4>🏆 성과 및 기술적 성취</h4>
+                <div class="project-section">
+                    <h4><i data-lucide="blocks" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>아키텍처 및 설계 결정</h4>
                     <ul>
-                        <li>5단계 AI 추천 알고리즘 설계 (분석 → 검색 → 필터링 → 선택 → 설명)</li>
-                        <li>Gemini AI를 활용한 자연어 처리 정확도 향상</li>
-                        <li>대화 세션 관리 시스템 구현으로 연속적인 대화 지원</li>
-                        <li>RESTful API 설계 및 구현</li>
+                        <li><strong>외부 API 적극 활용</strong>: Gemini AI로 자연어 처리, TMDB API로 영화 데이터 확보</li>
+                        <li><strong>Spring Boot RESTful API</strong>: 확장 가능한 백엔드 아키텍처 구축</li>
+                        <li><strong>대화형 UX</strong>: 영화 추천부터 시청까지 한 번에 해결하는 사용자 경험 설계</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h4><i data-lucide="sparkles" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>핵심 기능 1: AI 추천부터 시청까지 한 번에</h4>
+                    <ul>
+                        <li>사용자 입력 예시: "인생 영화는 '인셉션'이랑 '어바웃 타임'인데, 오늘은 혼자 볼만한 감성적인 영화 추천해줘!"</li>
+                        <li>AI가 <strong>영화 추천 + 추천 이유 + 시청 가능 OTT 정보</strong>를 한 번에 제공</li>
+                        <li>TMDB API 연동으로 20,000개 이상의 영화 데이터베이스 활용</li>
+                        <li>실시간 OTT 가격 정보 제공 (예: 왓챠 월 7,900원~)</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h4><i data-lucide="message-circle" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>핵심 기능 2: 대화로 성장하는 AI 영화 메이트</h4>
+                    <ul>
+                        <li><strong>대화 맥락 기억</strong>: "코미디 빼줘", "방금 본 영화 감상" 등 후속 대화 처리</li>
+                        <li><strong>자연스러운 피드백</strong>: 사용자 감상을 공유하며 AI와 취향 학습</li>
+                        <li><strong>감성적 이해</strong>: "혼자 볼만한", "여운이 남는" 등 추상적 표현도 정확하게 분석</li>
+                        <li>Gemini AI를 활용한 자연어 처리로 사용자 의도 파악</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h4><i data-lucide="user-check" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>나의 역할 (1인 개발)</h4>
+                    <ul>
+                        <li><strong>전체 프로젝트 기획 및 설계</strong>: 사용자 문제 정의부터 솔루션 도출까지</li>
+                        <li><strong>Spring Boot 백엔드 개발</strong>: RESTful API 설계 및 구현</li>
+                        <li><strong>Gemini AI 연동</strong>: 프롬프트 엔지니어링 및 자연어 처리 로직 개발</li>
+                        <li><strong>TMDB API 연동</strong>: 영화 데이터 검색, 파싱, OTT 정보 조회</li>
+                        <li><strong>프론트엔드 UI/UX 구현</strong>: 대화형 인터페이스 설계 및 개발</li>
+                    </ul>
+                </div>
+
+                <div class="project-section achievements">
+                    <h4><i data-lucide="target" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>개발 방향 및 성과</h4>
+                    <ul>
+                        <li><strong>3단계 개발 완료</strong>: TMDB 연동 → LLM 대화 기능 → UI/UX 완성</li>
+                        <li><strong>5단계 AI 추천 알고리즘</strong>: 분석 → 검색 → 필터링 → 선택 → 설명</li>
+                        <li><strong>외부 API 통합 경험</strong>: 2개의 주요 API를 효과적으로 연동</li>
+                        <li><strong>대화형 AI 서비스 구현</strong>: 단순 검색을 넘어 사용자와 소통하는 시스템 개발</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h4><i data-lucide="book-open" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>배운 점</h4>
+                    <ul>
+                        <li><strong>생성형 AI의 실전 활용</strong>: Gemini AI를 활용한 자연어 처리와 프롬프트 엔지니어링</li>
+                        <li><strong>외부 API 연동 노하우</strong>: 여러 API를 조합하여 시너지를 만드는 방법</li>
+                        <li><strong>대화형 UX 설계</strong>: AI와 사용자 간 자연스러운 대화 흐름 구현</li>
+                        <li><strong>문제 해결 중심 개발</strong>: 기술이 아닌 사용자 경험에서 시작하는 개발 프로세스</li>
+                    </ul>
+                </div>
+
+                <div class="project-section">
+                    <h4><i data-lucide="rocket" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>향후 개선 계획</h4>
+                    <ul>
+                        <li><strong>사용자 계정 시스템</strong>: 대화 히스토리 저장으로 더욱 개인화된 추천</li>
+                        <li><strong>감상평 기반 학습</strong>: 사용자 리뷰를 분석하여 추천 정확도 향상</li>
+                        <li><strong>OTT 가격 비교</strong>: 여러 플랫폼의 가격을 비교하여 경제적인 시청 방법 제안</li>
+                        <li><strong>추천 알고리즘 고도화</strong>: 더 많은 맥락 정보를 활용한 정교한 추천</li>
                     </ul>
                 </div>
             </div>
 
             <!-- Project 2: Arknights Helper -->
             <div class="project-card">
-                <h3>🎮 명일방주 게임 도우미 웹사이트</h3>
-                <div class="project-period">2024.09 ~ 2024.12 (팀 프로젝트)</div>
+                <h3><i data-lucide="gamepad-2" style="display: inline-block; width: 32px; height: 32px; vertical-align: middle; margin-right: 8px;"></i>명일방주 게임 도우미 웹사이트</h3>
+                <div class="project-period">2024.09 ~ 2024.12 | 팀 프로젝트</div>
                 <div class="project-description">
                     명일방주 게임 플레이어를 위한 종합 정보 및 계산 도구를 제공하는 웹사이트입니다. 
-                    게임 내 복잡한 계산을 자동화하고, 외부 API를 연동하여 
-                    실시간 게임 데이터를 제공합니다.
+                    게임 내 복잡한 계산을 자동화하고, 외부 API를 연동하여 실시간 게임 데이터를 제공합니다.
                 </div>
 
                 <div class="tech-stack">
@@ -586,48 +663,45 @@
                     <span class="tech-tag">JavaScript</span>
                     <span class="tech-tag">HTML/CSS</span>
                     <span class="tech-tag">MS-SQL</span>
-                    <span class="tech-tag">외부 API 연동</span>
+                    <span class="tech-tag">MVC 패턴</span>
                 </div>
 
-                <div class="project-features">
-                    <h4>주요 기능</h4>
+                <div class="project-section">
+                    <h4><i data-lucide="check-circle" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>주요 기능</h4>
                     <ul>
                         <li>공개모집 태그 조합 계산기 - 최적의 오퍼레이터 조합 추천</li>
                         <li>레벨링 계산기 - 필요한 경험치와 자원 자동 계산</li>
                         <li>재료 계산기 - 육성에 필요한 재료 목록 자동 생성</li>
                         <li>스테이지별 아이템 드롭률 정보 제공 (외부 API 연동)</li>
-                        <li>회원 관리 시스템 (로그인, 회원가입, 정보 수정)</li>
-                        <li>커뮤니티 게시판 기능</li>
+                        <li>회원 관리 시스템 및 커뮤니티 게시판</li>
                     </ul>
                 </div>
 
-                <div class="project-achievements">
-                    <h4>🏆 성과 및 기술적 성취</h4>
+                <div class="project-section achievements">
+                    <h4><i data-lucide="award" style="display: inline-block; width: 20px; height: 20px; vertical-align: middle; margin-right: 8px;"></i>기술적 성취</h4>
                     <ul>
                         <li>MVC 패턴 기반 웹 애플리케이션 설계 및 구현</li>
                         <li>데이터베이스 설계 및 최적화 (MS-SQL)</li>
                         <li>외부 게임 데이터 API 연동 및 파싱</li>
-                        <li>반응형 웹 디자인 적용</li>
                         <li>팀 프로젝트 협업 경험 (Git을 통한 버전 관리)</li>
                     </ul>
                 </div>
             </div>
-        </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2>Contact</h2>
-        <div class="contact-links">
-            <a href="https://github.com/yourusername" class="contact-link" target="_blank">GitHub</a>
-            <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-            <a href="https://padlet.com/sunheehwang2/ai-t1z03c04rb6lfv3t" class="contact-link" target="_blank">세미나 제출</a>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 윤동준 포트폴리오. All rights reserved.</p>
-    </footer>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-content">
+            <h2>Contact</h2>
+            <p>프로젝트 문의 및 협업 제안을 기다립니다</p>
+            <div class="contact-links">
+                <a href="https://github.com/yoon1017" class="contact-link" target="_blank">GitHub</a>
+                <a href="mailto:booohooo20@gmail.com" class="contact-link">Email</a>
+                <a href="https://padlet.com/sunheehwang2/ai-t1z03c04rb6lfv3t" class="contact-link" target="_blank">세미나 제출</a>
+            </div>
+        </div>
+    </section>
 
     <script>
         // Mobile menu toggle
@@ -644,7 +718,7 @@
             });
         });
 
-        // Add active state to nav links on scroll
+        // Smooth scroll and active nav update
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('section');
@@ -664,6 +738,9 @@
                 }
             });
         });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
