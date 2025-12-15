@@ -8,175 +8,173 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Google Fonts (Inter) -->
+    <!-- Google Fonts (Inter, Noto Sans KR) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome (for tech icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* Inter 폰트를 기본으로 하되, 한글은 Noto Sans KR을 사용 */
         body {
             font-family: 'Inter', 'Noto Sans KR', sans-serif;
-            color: #111827; /* Tailwind gray-900 */
+            color: #111827;
         }
-        /* Noto Sans KR 폰트가 적용될 클래스 (필요시) */
-        .font-noto {
-            font-family: 'Noto Sans KR', sans-serif;
-        }
-
-        /* 그라데이션 텍스트 */
+        .font-noto { font-family: 'Noto Sans KR', sans-serif; }
         .gradient-text {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        nav .nav-link-active { color: #667eea; font-weight: 600; }
+        
+        /* 커스텀 스크롤바 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #c7c7c7; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8a8a8; }
 
-        /* 활성 네비게이션 링크 스타일 */
-        nav .nav-link-active {
-            color: #667eea;
-            font-weight: 600;
+        /* 타임라인 스타일 */
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: #e5e7eb;
+            z-index: 0;
+        }
+        
+        /* 코드 블록 스타일 */
+        .code-preview {
+            background-color: #1f2937;
+            color: #e5e7eb;
+            font-family: monospace;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
         }
     </style>
 </head>
-<body class="bg-white">
+<body class="bg-gray-50">
 
     <!-- ========== HEADER ========== -->
-    <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md shadow-sm">
+    <header class="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
         <nav class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 items-center justify-between">
-                <!-- 로고 -->
                 <a class="flex-shrink-0" href="#home">
                     <span class="text-2xl font-bold gradient-text">YoonDev</span>
                 </a>
-                
-                <!-- 데스크탑 네비게이션 -->
                 <div class="hidden md:flex md:items-center md:space-x-8">
-                    <a href="#home" class="nav-link text-gray-600 hover:text-indigo-600" data-section="home">Home</a>
-                    <a href="#about" class="nav-link text-gray-600 hover:text-indigo-600" data-section="about">About</a>
-                    <a href="#skills" class="nav-link text-gray-600 hover:text-indigo-600" data-section="skills">Skills</a>
-                    <a href="#projects" class="nav-link text-gray-600 hover:text-indigo-600" data-section="projects">Projects</a>
+                    <a href="#home" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors" data-section="home">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors" data-section="about">About</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors" data-section="skills">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-600 hover:text-indigo-600 transition-colors" data-section="projects">Projects</a>
                 </div>
-
-                <!-- 연락하기 버튼 (데스크탑) -->
                 <div class="hidden md:block">
-                    <a href="#contact" class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 transition-colors">
+                    <a href="#contact" class="rounded-full bg-indigo-600 px-5 py-2 text-sm font-medium text-white shadow-md hover:bg-indigo-700 transition-all hover:shadow-lg">
                         Contact Me
                     </a>
                 </div>
-
-                <!-- 모바일 메뉴 버튼 -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-indigo-600">
-                        <span class="sr-only">Open main menu</span>
-                        <i data-lucide="menu" class="block h-6 w-6"></i>
-                    </button>
-                </div>
             </div>
         </nav>
-
-        <!-- 모바일 메뉴 (숨겨짐) -->
-        <div id="mobile-menu" class="hidden md:hidden">
-            <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
-                <a href="#home" class="nav-link block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600" data-section="home">Home</a>
-                <a href="#about" class="nav-link block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600" data-section="about">About</a>
-                <a href="#skills" class="nav-link block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600" data-section="skills">Skills</a>
-                <a href="#projects" class="nav-link block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-indigo-600" data-section="projects">Projects</a>
-            </div>
-            <div class="border-t border-gray-200 pt-4 pb-3">
-                <a href="#contact" class="block w-full text-left rounded-md px-5 py-2 text-base font-medium text-indigo-600 hover:bg-indigo-50">
-                    Contact Me
-                </a>
-            </div>
-        </div>
     </header>
 
     <main>
-        <!-- ========== HERO (HOME) ========== -->
-        <section id="home" class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
-            <!-- 그라데이션 배경 효과 -->
-            <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-700 opacity-90"></div>
-            <div class="relative z-10 mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-                <h1 class="text-5xl font-extrabold tracking-tight sm:text-6xl md:text-7xl font-noto">
+        <!-- ========== HERO ========== -->
+        <section id="home" class="relative flex min-h-screen items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-600 to-purple-800 text-white">
+            <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20"></div>
+            <div class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
+                <span class="inline-block rounded-full bg-white/10 px-4 py-1.5 text-sm font-medium text-indigo-100 backdrop-blur-sm mb-6 border border-white/20">
+                    AI & Web Developer
+                </span>
+                <h1 class="text-5xl font-extrabold tracking-tight sm:text-7xl font-noto mb-6 leading-tight">
                     윤동준
                 </h1>
-                <p class="mt-6 text-xl sm:text-2xl md:text-3xl font-medium text-indigo-100 font-noto">
-                    생성형 AI를 활용한 혁신적인 개발자
+                <p class="text-xl sm:text-2xl md:text-3xl font-medium text-indigo-100 font-noto mb-8">
+                    생성형 AI로 사용자 경험의<br class="sm:hidden" /> 새로운 가능성을 엽니다
                 </p>
-                <p class="mt-4 text-lg sm:text-xl text-indigo-200 font-noto">
-                    동양미래대학교 컴퓨터소프트웨어공학과
+                <p class="text-lg text-indigo-200 font-noto mb-12 max-w-2xl mx-auto">
+                    동양미래대학교 컴퓨터소프트웨어공학과 | 문제를 해결하는 실용적인 개발자
                 </p>
-                <div class="mt-12 flex flex-col sm:flex-row sm:justify-center sm:space-x-4 space-y-4 sm:space-y-0">
-                    <a href="#projects" class="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 shadow-lg hover:bg-indigo-50 transition-colors">
-                        프로젝트 보기
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#projects" class="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-bold text-indigo-600 shadow-xl hover:bg-gray-50 hover:scale-105 transition-all">
+                        프로젝트 보기 <i data-lucide="arrow-right" class="ml-2 h-5 w-5"></i>
                     </a>
-                    <a href="#about" class="inline-flex items-center justify-center rounded-md border border-white/50 bg-white/10 px-8 py-3 text-base font-medium text-white backdrop-blur-sm hover:bg-white/20 transition-colors">
-                        더 알아보기
+                    <a href="#contact" class="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-8 py-3.5 text-base font-medium text-white backdrop-blur-md hover:bg-white/20 transition-all">
+                        연락하기
                     </a>
                 </div>
             </div>
-            <!-- 스크롤 다운 아이콘 -->
-            <div class="absolute bottom-10 z-10 text-white">
-                <i data-lucide="arrow-down" class="h-8 w-8 animate-bounce"></i>
+            <div class="absolute bottom-10 z-10 animate-bounce">
+                <i data-lucide="chevrons-down" class="h-8 w-8 text-white/70"></i>
             </div>
         </section>
 
         <!-- ========== ABOUT ME ========== -->
-        <section id="about" class="py-24 sm:py-32 bg-gray-50">
+        <section id="about" class="py-24 bg-white">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 gap-16 lg:grid-cols-3">
-                    <!-- 왼쪽: 프로필 카드 -->
-                    <div class="lg:col-span-1">
-                        <div class="rounded-2xl bg-white p-8 shadow-xl text-center">
-                            <!-- 프로필 이미지 (플레이스홀더) -->
-                            <img class="mx-auto h-48 w-48 rounded-full object-cover shadow-md" 
-                                 src="https://placehold.co/200x200/667eea/FFFFFF?text=YDJ&font=inter" 
-                                 alt="윤동준 프로필 이미지">
-                            <h3 class="mt-6 text-2xl font-bold text-gray-900 font-noto">윤동준</h3>
-                            <p class="mt-2 text-lg font-medium text-indigo-600">Developer</p>
+                <div class="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+                    <!-- Profile Card -->
+                    <div class="lg:col-span-4">
+                        <div class="sticky top-24 rounded-2xl bg-white p-8 shadow-xl border border-gray-100 text-center">
+                            <div class="relative mx-auto h-48 w-48 mb-6">
+                                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 blur-lg opacity-50"></div>
+                                <img class="relative h-48 w-48 rounded-full object-cover border-4 border-white shadow-md" 
+                                     src="https://placehold.co/200x200/667eea/FFFFFF?text=YDJ" 
+                                     alt="Profile">
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-900 font-noto">윤동준</h3>
+                            <p class="text-indigo-600 font-medium mb-6">Backend & AI Developer</p>
                             
-                            <!-- 연락처 링크 -->
-                            <div class="mt-6 flex justify-center space-x-4">
-                                <a href="https://github.com/yoon1017" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-indigo-600" title="GitHub">
-                                    <i data-lucide="github" class="h-7 w-7"></i>
+                            <div class="flex justify-center gap-4 mb-8">
+                                <a href="https://github.com/yoon1017" target="_blank" class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-100 hover:text-indigo-600 transition-colors">
+                                    <i data-lucide="github" class="h-6 w-6"></i>
                                 </a>
-                                <a href="mailto:booohooo20@gmail.com" class="text-gray-500 hover:text-indigo-600" title="Email">
-                                    <i data-lucide="mail" class="h-7 w-7"></i>
+                                <a href="mailto:booohooo20@gmail.com" class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-100 hover:text-indigo-600 transition-colors">
+                                    <i data-lucide="mail" class="h-6 w-6"></i>
                                 </a>
-                                <!-- 세미나 제출 링크 -->
-                                <a href="https://padlet.com/sunheehwang2/ai-t1z03c04rb6lfv3t" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-indigo-600" title="세미나 제출">
-                                    <i data-lucide="clipboard-check" class="h-7 w-7"></i>
+                                <a href="#" class="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-indigo-100 hover:text-indigo-600 transition-colors">
+                                    <i data-lucide="file-text" class="h-6 w-6"></i>
                                 </a>
+                            </div>
+                            
+                            <div class="space-y-3 text-left">
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="map-pin" class="h-4 w-4 mr-3 text-indigo-500"></i> 서울, 대한민국
+                                </div>
+                                <div class="flex items-center text-sm text-gray-600">
+                                    <i data-lucide="graduation-cap" class="h-4 w-4 mr-3 text-indigo-500"></i> 동양미래대학교 (재학)
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 오른쪽: 소개글 -->
-                    <div class="lg:col-span-2">
-                        <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl font-noto">
-                            About Me
+                    <!-- Introduction -->
+                    <div class="lg:col-span-8">
+                        <span class="text-indigo-600 font-semibold tracking-wider uppercase text-sm">Introduction</span>
+                        <h2 class="text-4xl font-bold text-gray-900 font-noto mt-2 mb-8">
+                            사용자의 문제를 <br class="hidden sm:block" />
+                            <span class="gradient-text">기술과 대화</span>로 해결합니다.
                         </h2>
-                        <div class="mt-8 space-y-6 text-lg text-gray-700 leading-relaxed font-noto">
+                        <div class="space-y-6 text-lg text-gray-700 leading-relaxed font-noto">
                             <p>
-                                안녕하세요! <strong class="font-semibold text-indigo-600">생성형 AI를 활용하여 사용자 경험을 혁신하는 개발자</strong> 윤동준입니다.
+                                안녕하세요! 단순히 기능을 구현하는 것을 넘어, 
+                                <strong class="bg-indigo-50 text-indigo-700 px-1 rounded">"왜 이 기능이 필요한가?"</strong>를 끊임없이 고민하는 개발자 윤동준입니다.
                             </p>
                             <p>
-                                저는 단순히 기술을 구현하는 것을 넘어, <strong class="font-semibold text-gray-900">사용자의 실제 문제를 해결하는 서비스</strong>를 만드는 것에 열정을 가지고 있습니다. 
-                                "왜 이 기능이 필요한가?"를 항상 고민하며, 기술이 사람들의 일상에 자연스럽게 녹아들 수 있는 방법을 모색합니다.
+                                최근에는 <strong>Gemini AI</strong>와 같은 생성형 인공지능 기술을 활용하여 사용자 경험을 혁신하는 데 깊은 관심을 가지고 있습니다. 
+                                딱딱한 검색창 대신 <strong>"대화"</strong>를 통해 사용자의 의도를 파악하고, 
+                                개인화된 솔루션을 제공하는 인터페이스를 지향합니다.
                             </p>
-                            <p>
-                                특히 <strong class="font-semibold text-gray-900">Gemini AI와 TMDB API</strong>를 활용한 MovieTalk 프로젝트에서는 
-                                "영화 선택의 피로감"이라는 일상적인 문제를 AI 대화를 통해 해결했습니다. 
-                                사용자가 자연어로 취향을 표현하면, AI가 이를 이해하고 최적의 영화를 추천하는 
-                                <strong class="font-semibold text-gray-900">1인 개발 프로젝트</strong>를 완성했습니다.
-                            </p>
-                            <p>
-                                또한 JSP 팀 프로젝트에서는 <strong class="font-semibold text-gray-900">명일방주 게임 도우미 웹사이트</strong>를 개발하며 
-                                외부 API 연동, 데이터베이스 설계, 팀 협업 경험을 쌓았습니다.
-                            </p>
-                            <p>
-                                <strong class="font-semibold text-gray-900">동양미래대학교 컴퓨터소프트웨어공학과</strong>에서 웹 개발과 AI 기술을 공부하고 있으며,
-                                배운 기술을 실제 프로젝트에 적용하며 성장하는 개발자가 되고자 합니다.
-                            </p>
+                            <div class="bg-gray-50 border-l-4 border-indigo-500 p-6 rounded-r-lg">
+                                <p class="italic text-gray-600">
+                                    "기술은 사람을 향해야 한다고 믿습니다. 
+                                    복잡한 기술적 로직은 뒤에 숨기고, 사용자는 직관적이고 따뜻한 경험만을 누릴 수 있도록 만드는 것이 저의 개발 철학입니다."
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -184,260 +182,376 @@
         </section>
 
         <!-- ========== SKILLS ========== -->
-        <section id="skills" class="py-24 sm:py-32 bg-white">
+        <section id="skills" class="py-24 bg-gray-50">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl font-noto">
-                        Skills
-                    </h2>
-                    <p class="mt-4 text-xl text-gray-600">
-                        제가 다룰 수 있는 기술 스택입니다.
-                    </p>
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold text-gray-900 font-noto">Technical Skills</h2>
+                    <p class="mt-4 text-gray-600">아이디어를 현실로 만드는 기술 스택입니다.</p>
                 </div>
 
-                <div class="mt-16 space-y-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Backend -->
-                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Backend</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge">Java</span>
-                            <span class="skill-badge">Spring Boot</span>
-                            <span class="skill-badge">JSP/Servlet</span>
-                            <span class="skill-badge">MySQL</span>
-                            <span class="skill-badge">MS-SQL</span>
-                            <span class="skill-badge">RESTful API</span>
+                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="h-12 w-12 bg-indigo-100 rounded-lg flex items-center justify-center mb-6 text-indigo-600">
+                            <i class="fas fa-server text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Backend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">Java 21</span>
+                            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-md text-sm font-medium">Spring Boot 3.x</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">JPA/Hibernate</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">MySQL/H2</span>
                         </div>
                     </div>
                     
+                    <!-- AI & Data -->
+                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6 text-purple-600">
+                            <i class="fas fa-brain text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">AI & Data</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-md text-sm font-medium">Gemini API</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">Prompt Eng.</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">TMDB API</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">Rest Template</span>
+                        </div>
+                    </div>
+
                     <!-- Frontend -->
-                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">Frontend</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge">JavaScript</span>
-                            <span class="skill-badge">HTML/CSS</span>
-                            <span class="skill-badge">React</span>
+                    <div class="bg-white rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow border border-gray-100">
+                        <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mb-6 text-blue-600">
+                            <i class="fas fa-laptop-code text-xl"></i>
                         </div>
-                    </div>
-                    
-                    <!-- AI & Tools -->
-                    <div>
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-6">AI & Tools</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="skill-badge">Gemini AI</span>
-                            <span class="skill-badge">TMDB API</span>
-                            <span class="skill-badge">Git</span>
-                            <span class="skill-badge">IntelliJ IDEA</span>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Frontend</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">HTML5/CSS3</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">JavaScript</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-700 rounded-md text-sm font-medium">Tailwind CSS</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========== PROJECTS ========== -->
-        <section id="projects" class="py-24 sm:py-32 bg-gray-50">
+        <!-- ========== PROJECTS (MovieTalk Only) ========== -->
+        <section id="projects" class="py-24 bg-white">
             <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="text-center">
-                    <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl font-noto">
-                        Projects
+                <div class="text-center mb-16">
+                    <span class="text-indigo-600 font-semibold tracking-wider uppercase text-sm">Featured Project</span>
+                    <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl font-noto mt-2">
+                        MovieTalk
                     </h2>
                     <p class="mt-4 text-xl text-gray-600">
-                        저의 열정과 노력이 담긴 프로젝트들입니다.
+                        AI와 함께하는 심도 있는 영화 토론 플랫폼
                     </p>
                 </div>
 
-                <!-- 프로젝트 카드 리스트 -->
-                <div class="mt-20 space-y-24">
+                <!-- MovieTalk Project Card -->
+                <div class="rounded-3xl bg-white border border-gray-200 shadow-2xl overflow-hidden">
+                    <!-- 1. Header & Gallery -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2">
+                        <!-- Left: Image Gallery -->
+                        <div class="bg-gray-900 p-8 flex items-center justify-center relative min-h-[400px]">
+                            <!-- 메인 이미지 -->
+                            <img src="./images/main-ui.png" alt="MovieTalk Main UI" class="rounded-lg shadow-2xl border border-gray-700 w-full object-cover">
+                            <!-- 장식용 배경 요소 -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent opacity-80"></div>
+                            <div class="absolute bottom-6 left-8 right-8 text-white">
+                                <div class="flex gap-2 mb-2">
+                                    <span class="px-2 py-1 bg-red-600 text-white text-xs font-bold rounded">Netflix Style</span>
+                                    <span class="px-2 py-1 bg-indigo-600 text-white text-xs font-bold rounded">AI Chatbot</span>
+                                </div>
+                                <h3 class="text-2xl font-bold">감정 기반 AI 영화 추천</h3>
+                            </div>
+                        </div>
 
-                    <!-- Project 1: MovieTalk -->
-                    <div class="rounded-2xl bg-white shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-indigo-200">
-                        <div class="grid grid-cols-1">
-                            <!-- 프로젝트 메인 이미지 (플레이스홀더) -->
-                            <div class="relative">
-                                <img src="https://placehold.co/800x450/667eea/FFFFFF?text=MovieTalk+Preview&font=inter" 
-                                     alt="MovieTalk 프로젝트 메인 이미지" 
-                                     class="h-80 w-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                                <div class="absolute bottom-6 left-6 text-white">
-                                    <h3 class="text-3xl font-bold font-noto">MovieTalk - AI 영화 추천 시스템</h3>
-                                    <p class="text-lg text-indigo-200">2025.11 ~ 현재 | 1인 개발</p>
+                        <!-- Right: Project Summary -->
+                        <div class="p-8 lg:p-12 flex flex-col justify-center bg-white">
+                            <h3 class="text-3xl font-bold text-gray-900 font-noto mb-2">MovieTalk</h3>
+                            <p class="text-indigo-600 font-medium mb-6">1인 개발 | 2025.11.10 ~ 11.20 (10일)</p>
+                            
+                            <p class="text-gray-700 mb-6 leading-relaxed">
+                                "비 오는 날 혼자 울고 싶을 때 볼만한 영화 없을까?"<br>
+                                단순 키워드 검색의 한계를 넘어, <strong>사용자의 감정과 상황을 이해하는 AI 영화 친구</strong>입니다.
+                                444개의 실제 관객 리뷰 데이터를 학습한 AI가 단순 추천을 넘어 깊이 있는 영화 토론까지 제공합니다.
+                            </p>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600 text-sm"><strong>Gemini AI 감정 분석:</strong> 사용자 입력의 미묘한 뉘앙스 파악</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600 text-sm"><strong>RAG 기반 토론:</strong> 444개 실제 리뷰 데이터 기반 팩트 체크 및 토론</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <div class="flex-shrink-0 h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                                        <i class="fas fa-check text-green-600 text-xs"></i>
+                                    </div>
+                                    <p class="ml-3 text-gray-600 text-sm"><strong>실시간 OTT 정보:</strong> TMDB API 연동 스트리밍 정보 제공</p>
                                 </div>
                             </div>
 
-                            <!-- 프로젝트 정보 -->
-                            <div class="p-8 md:p-12">
-                                <!-- 기술 스택 -->
-                                <div class="mb-6">
-                                    <h4 class="text-sm font-semibold text-indigo-600 uppercase tracking-wider mb-3">Tech Stack</h4>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="tech-tag">Spring Boot</span>
-                                        <span class="tech-tag">Gemini AI</span>
-                                        <span class="tech-tag">TMDB API</span>
-                                        <span class="tech-tag">JavaScript</span>
-                                        <span class="tech-tag">HTML/CSS</span>
-                                        <span class="tech-tag">RESTful API</span>
-                                    </div>
-                                </div>
-
-                                <!-- 문제 정의 -->
-                                <div class="mb-6">
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">문제 정의</h4>
-                                    <p class="text-gray-700 leading-relaxed font-noto">
-                                        수많은 OTT와 영화 속에서 취향에 맞는 작품을 찾는 피로감,
-                                        단순 검색과 필터만으로는 미묘한 감성이나 분위기를 찾기 어려운 문제를 해결하고자 했습니다.
-                                    </p>
-                                </div>
-
-                                <!-- 핵심 기능 (새로운 디자인) -->
-                                <div class="mb-6">
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">핵심 기능</h4>
-                                    <div class="mt-4 space-y-4">
-                                        <!-- 기능 카드 1 -->
-                                        <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-5 shadow-sm">
-                                            <div class="flex items-center space-x-3">
-                                                <i data-lucide="sparkles" class="h-6 w-6 flex-shrink-0 text-indigo-600"></i>
-                                                <h5 class="text-lg font-semibold text-gray-900 font-noto">AI 추천부터 시청까지</h5>
-                                            </div>
-                                            <p class="mt-2 text-gray-700 leading-relaxed font-noto pl-9">
-                                                "인생 영화는 '인셉션'인데, 오늘은 혼자 볼 감성적인 영화 추천해줘!" 같은
-                                                자연어 입력을 분석, Gemini AI가 영화 추천 + 이유 + 시청 가능 OTT 정보를 한 번에 제공합니다.
-                                            </p>
-                                        </div>
-                                        <!-- 기능 카드 2 -->
-                                        <div class="rounded-lg border border-indigo-200 bg-indigo-50 p-5 shadow-sm">
-                                            <div class="flex items-center space-x-3">
-                                                <i data-lucide="message-circle" class="h-6 w-6 flex-shrink-0 text-indigo-600"></i>
-                                                <h5 class="text-lg font-semibold text-gray-900 font-noto">대화로 성장하는 AI</h5>
-                                            </div>
-                                            <p class="mt-2 text-gray-700 leading-relaxed font-noto pl-9">
-                                                "코미디 빼줘" 등 대화 맥락을 기억하고, 사용자 감상을 공유하며 취향을 학습합니다. 
-                                                "여운이 남는" 같은 추상적 표현도 분석하여 의도를 파악합니다.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 나의 역할 -->
-                                <div class="mb-6">
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">나의 역할 (1인 개발)</h4>
-                                    <ul class="list-disc list-inside space-y-2 text-gray-700 font-noto">
-                                        <li>전체 프로젝트 기획, 사용자 문제 정의, 솔루션 도출</li>
-                                        <li>Spring Boot 기반 RESTful API 설계 및 백엔드 개발</li>
-                                        <li>Gemini AI 프롬프트 엔지니어링 및 자연어 처리 로직 개발</li>
-                                        <li>TMDB API 연동 (영화 데이터, OTT 정보 조회)</li>
-                                        <li>대화형 프론트엔드 UI/UX 구현</li>
-                                    </ul>
-                                </div>
-
-                                <!-- 성과 및 회고 -->
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">배운 점</h4>
-                                        <ul class="list-disc list-inside space-y-2 text-gray-700 font-noto">
-                                            <li>생성형 AI (Gemini) 실전 활용</li>
-                                            <li>외부 API (TMDB) 연동 노하우</li>
-                                            <li>대화형 UX 설계 및 구현</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">개선 계획</h4>
-                                        <ul class="list-disc list-inside space-y-2 text-gray-700 font-noto">
-                                            <li>사용자 계정 시스템 (대화 히스토리)</li>
-                                            <li>감상평 기반 추천 정확도 향상</li>
-                                            <li>OTT 가격 비교 기능 추가</li>
-                                        </ul>
-                                    </div>
+                            <div class="mt-8 pt-8 border-t border-gray-100">
+                                <h4 class="text-sm font-bold text-gray-900 uppercase tracking-wide mb-3">Tech Stack</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">Java 21</span>
+                                    <span class="tech-tag">Spring Boot</span>
+                                    <span class="tech-tag">JPA</span>
+                                    <span class="tech-tag">Gemini Flash 2.0</span>
+                                    <span class="tech-tag">H2 DB</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 2: Arknights Helper -->
-                    <div class="rounded-2xl bg-white shadow-2xl overflow-hidden transition-all duration-300 hover:shadow-indigo-200">
-                        <div class="grid grid-cols-1">
-                            <!-- 프로젝트 메인 이미지 (플레이스홀더) -->
-                            <div class="relative">
-                                <img src="https://placehold.co/800x450/764ba2/FFFFFF?text=Arknights+Helper&font=inter" 
-                                     alt="명일방주 도우미 프로젝트 메인 이미지" 
-                                     class="h-80 w-full object-cover">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                                <div class="absolute bottom-6 left-6 text-white">
-                                    <h3 class="text-3xl font-bold font-noto">명일방주 게임 도우미 웹사이트</h3>
-                                    <p class="text-lg text-indigo-200">2024.09 ~ 2024.12 | 팀 프로젝트</p>
+                    <!-- 2. Detailed Content Area -->
+                    <div class="bg-gray-50 px-8 py-12 lg:px-12 border-t border-gray-200">
+                        
+                        <!-- UI Gallery Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+                            <div class="group relative overflow-hidden rounded-xl shadow-lg">
+                                <img src="./images/chat-ui.png" alt="Chat Recommendation" class="w-full transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-white">
+                                    <p class="font-bold text-sm">감정 분석 기반 추천 결과</p>
+                                </div>
+                            </div>
+                            <div class="group relative overflow-hidden rounded-xl shadow-lg">
+                                <img src="./images/discuss-ui.png" alt="Discussion Mode" class="w-full transition-transform duration-300 group-hover:scale-105">
+                                <div class="absolute bottom-0 left-0 right-0 bg-black/70 p-4 text-white">
+                                    <p class="font-bold text-sm">심층 토론 모드 (Review based)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Planning vs Implementation Table -->
+                        <div class="mb-16">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 font-noto border-l-4 border-indigo-600 pl-4">
+                                기획 vs 실제 구현 (Planning vs Implementation)
+                            </h3>
+                            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-200">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-gray-100 border-b border-gray-200 text-gray-700 text-sm uppercase tracking-wider">
+                                            <th class="p-4 font-bold w-1/3">초기 기획 (Initial Plan)</th>
+                                            <th class="p-4 font-bold w-1/2">실제 구현 (Implementation)</th>
+                                            <th class="p-4 font-bold text-center">상태</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-100 text-sm text-gray-600">
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="p-4 font-medium text-gray-900">AI 기반 감정 분석 추천</td>
+                                            <td class="p-4">Gemini API로 4가지 감정 키워드 추출 및 TMDB 매칭 구현</td>
+                                            <td class="p-4 text-center"><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Done (100%)</span></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="p-4 font-medium text-gray-900">영화 심층 토론 챗봇</td>
+                                            <td class="p-4">Top 100 영화, 444개 리뷰 DB 구축 및 RAG 기반 토론 구현</td>
+                                            <td class="p-4 text-center"><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Done (100%)</span></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="p-4 font-medium text-gray-900">OTT 플랫폼 정보</td>
+                                            <td class="p-4">TMDB Provider API 연동 (넷플릭스, 왓챠 등)</td>
+                                            <td class="p-4 text-center"><span class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Done (100%)</span></td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50">
+                                            <td class="p-4 font-medium text-gray-900">사용자 개인화 (취향 학습)</td>
+                                            <td class="p-4">세션 기반 일시적 대화 기록 관리 (DB 영구 저장 제외)</td>
+                                            <td class="p-4 text-center"><span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">Partial (50%)</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- System Architecture & DB (Image) -->
+                        <div class="mb-16">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 font-noto border-l-4 border-indigo-600 pl-4">
+                                System Architecture & DB
+                            </h3>
+                            <div class="bg-gray-900 rounded-xl p-4 shadow-lg overflow-hidden">
+                                <!-- 업로드해주신 아키텍처/DB 다이어그램 이미지 -->
+                                <img src="./images/image_7a1b65.png" alt="System Architecture and DB Schema" class="w-full h-auto rounded-lg opacity-90 hover:opacity-100 transition-opacity">
+                            </div>
+                        </div>
+
+                        <!-- Two Columns: Timeline & Challenges -->
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            
+                            <!-- Timeline -->
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6 font-noto border-l-4 border-indigo-600 pl-4">
+                                    Key Features Evolution
+                                </h3>
+                                <div class="relative timeline-line pl-8 space-y-8">
+                                    <!-- V1.0 -->
+                                    <div class="relative z-10">
+                                        <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-white bg-gray-300"></div>
+                                        <span class="inline-block px-2 py-1 bg-gray-200 text-gray-700 text-xs font-bold rounded mb-1">V1.0</span>
+                                        <h4 class="text-lg font-bold text-gray-900">기본 추천 시스템</h4>
+                                        <p class="text-gray-600 text-sm mt-1">TMDB API 기반 영화 검색 및 정보 제공, 장르/키워드 필터링</p>
+                                    </div>
+                                    <!-- V2.5 -->
+                                    <div class="relative z-10">
+                                        <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-white bg-indigo-500 ring-4 ring-indigo-100"></div>
+                                        <span class="inline-block px-2 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded mb-1">V2.5</span>
+                                        <h4 class="text-lg font-bold text-gray-900">감정 분석 대화형 추천</h4>
+                                        <p class="text-gray-600 text-sm mt-1">Gemini AI가 "우울할 때 볼만한 영화" 같은 감정적 맥락 분석</p>
+                                    </div>
+                                    <!-- V3.0 -->
+                                    <div class="relative z-10">
+                                        <div class="absolute -left-10 mt-1.5 h-4 w-4 rounded-full border-2 border-white bg-purple-600 ring-4 ring-purple-100"></div>
+                                        <span class="inline-block px-2 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded mb-1">V3.0 (Core)</span>
+                                        <h4 class="text-lg font-bold text-gray-900">심층 영화 토론</h4>
+                                        <p class="text-gray-600 text-sm mt-1">444개 실제 리뷰 데이터 RAG 적용, 팩트 기반 논리적 토론 구현</p>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- 프로젝트 정보 -->
-                            <div class="p-8 md:p-12">
-                                <!-- 기술 스택 -->
-                                <div class="mb-6">
-                                    <h4 class="text-sm font-semibold text-indigo-600 uppercase tracking-wider mb-3">Tech Stack</h4>
-                                    <div class="flex flex-wrap gap-2">
-                                        <span class="tech-tag">JSP & Servlet</span>
-                                        <span class="tech-tag">JavaScript</span>
-                                        <span class="tech-tag">HTML/CSS</span>
-                                        <span class="tech-tag">MS-SQL</span>
-                                        <span class="tech-tag">MVC 패턴</span>
+                            <!-- Tech Challenges -->
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6 font-noto border-l-4 border-red-500 pl-4">
+                                    Technical Challenges
+                                </h3>
+                                <div class="bg-white rounded-xl p-6 shadow-md border border-gray-100 h-full">
+                                    <div class="mb-4">
+                                        <h4 class="flex items-center text-red-600 font-bold mb-2">
+                                            <i data-lucide="alert-triangle" class="w-5 h-5 mr-2"></i> Latency Issue
+                                        </h4>
+                                        <p class="text-gray-600 text-sm">
+                                            초기 Gemini API 호출 시, 모든 리뷰 데이터를 프롬프트에 포함시키자 응답 시간이 <strong>5초 이상 지연</strong>되는 현상 발생.
+                                        </p>
+                                    </div>
+                                    <div class="border-t border-gray-100 my-4"></div>
+                                    <div>
+                                        <h4 class="flex items-center text-green-600 font-bold mb-2">
+                                            <i data-lucide="check-circle-2" class="w-5 h-5 mr-2"></i> Solution: Hybrid Retrieval
+                                        </h4>
+                                        <ul class="text-gray-600 text-sm space-y-2 list-disc list-inside">
+                                            <li><strong>요약 테이블 분리:</strong> `review_summaries` 테이블을 구축하여 감정/키워드 데이터 우선 조회</li>
+                                            <li><strong>이중화 전략:</strong> 일반 대화는 요약본 사용, 상세 질문 시에만 전체 리뷰 로딩</li>
+                                            <li><strong>결과:</strong> 평균 응답 속도 5s → <strong>2s (60% 단축)</strong></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Core Prompt Engineering (Updated) -->
+                        <div class="mt-16">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6 font-noto border-l-4 border-gray-800 pl-4">
+                                Core Prompt Engineering
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Prompt 1: Emotion Analysis -->
+                                <div class="bg-gray-900 rounded-lg p-6 font-mono text-xs md:text-sm text-gray-300 shadow-inner overflow-x-auto border border-gray-700">
+                                    <div class="flex items-center justify-between border-b border-gray-700 pb-3 mb-4">
+                                        <span class="text-indigo-400 font-bold text-base">SYSTEM: Emotion Analysis</span>
+                                        <i class="fas fa-brain text-indigo-400"></i>
+                                    </div>
+                                    <div class="space-y-2 leading-relaxed">
+                                        <p>You are an expert at analyzing user emotions and situations.</p>
+                                        <p class="text-gray-400">Extract from user input:</p>
+                                        <ol class="list-decimal list-inside text-indigo-200 ml-1">
+                                            <li>Emotion <span class="text-gray-500">(e.g., Sadness, Loneliness, Joy)</span></li>
+                                            <li>Situation <span class="text-gray-500">(e.g., Alone, With Family, Date)</span></li>
+                                            <li>Time <span class="text-gray-500">(e.g., Rainy Day, Weekend Night)</span></li>
+                                            <li>Purpose <span class="text-gray-500">(e.g., Cry, Laugh, Think)</span></li>
+                                            <li>Exclusions <span class="text-gray-500">(e.g., "No Horror")</span></li>
+                                        </ol>
+                                        <br>
+                                        <p class="text-gray-400">Example:</p>
+                                        <div class="bg-black/50 p-3 rounded border-l-2 border-indigo-500">
+                                            <p><span class="text-yellow-500">Input:</span> "비 오는 날 혼자 펑펑 울고 싶을 때"</p>
+                                            <p><span class="text-green-500">Analysis:</span> Emotion=Sadness, Situation=Alone, Purpose=Emotional Release</p>
+                                            <p><span class="text-blue-400">Output:</span> {"genres": ["Drama", "Romance"], "keywords": ["melancholy"]}</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-gray-700 flex justify-between text-xs text-gray-500">
+                                        <span>Used in: Movie Recommendation (V2.5)</span>
+                                        <span>Model: Gemini 2.0 Flash</span>
                                     </div>
                                 </div>
 
-                                <!-- 프로젝트 설명 -->
-                                <div class="mb-6">
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">프로젝트 개요</h4>
-                                    <p class="text-gray-700 leading-relaxed font-noto">
-                                        명일방주 게임 플레이어를 위한 종합 정보 및 계산 도구 웹사이트입니다. 
-                                        게임 내 복잡한 계산을 자동화하고, 외부 API를 연동하여 실시간 게임 데이터를 제공합니다.
-                                    </p>
-                                </div>
-
-                                <!-- 주요 기능 -->
-                                <div class="mb-6">
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">주요 기능</h4>
-                                    <ul class="list-disc list-inside space-y-2 text-gray-700 font-noto">
-                                        <li>공개모집 태그 조합 계산기 (최적 조합 추천)</li>
-                                        <li>레벨링 및 재료 계산기 (필요 자원 자동 계산)</li>
-                                        <li>스테이지별 아이템 드롭률 정보 제공 (외부 API 연동)</li>
-                                        <li>회원 관리 시스템 및 커뮤니티 게시판</li>
-                                    </ul>
-                                </div>
-
-                                <!-- 기술적 성취 -->
-                                <div>
-                                    <h4 class="text-xl font-semibold text-gray-900 mb-3 font-noto">기술적 성취</h4>
-                                    <ul class="list-disc list-inside space-y-2 text-gray-700 font-noto">
-                                        <li>MVC 패턴 기반 웹 애플리케이션 설계 및 구현</li>
-                                        <li>데이터베이스 설계 및 최적화 (MS-SQL)</li>
-                                        <li>외부 게임 데이터 API 연동 및 파싱</li>
-                                        <li>팀 프로젝트 협업 경험 (Git 버전 관리)</li>
-                                    </ul>
+                                <!-- Prompt 2: Discussion Persona -->
+                                <div class="bg-gray-900 rounded-lg p-6 font-mono text-xs md:text-sm text-gray-300 shadow-inner overflow-x-auto border border-gray-700">
+                                    <div class="flex items-center justify-between border-b border-gray-700 pb-3 mb-4">
+                                        <span class="text-purple-400 font-bold text-base">SYSTEM: Discussion Partner</span>
+                                        <i class="fas fa-comments text-purple-400"></i>
+                                    </div>
+                                    <div class="space-y-2 leading-relaxed">
+                                        <p>You are a movie discussion expert who learned 444 real reviews.</p>
+                                        <p>Base your response <span class="text-red-400 font-bold">STRICTLY</span> on {review_data}.</p>
+                                        <br>
+                                        <p class="text-gray-400">Rules:</p>
+                                        <ol class="list-decimal list-inside text-purple-200 ml-1">
+                                            <li>Acknowledge user's opinion first</li>
+                                            <li>Cite specific reviews naturally</li>
+                                            <li>Present opposing views (balance)</li>
+                                            <li>Add logical analysis (director's intent, film techniques)</li>
+                                            <li>Ask follow-up questions</li>
+                                        </ol>
+                                        <br>
+                                        <p class="text-gray-400">Example:</p>
+                                        <div class="bg-black/50 p-3 rounded border-l-2 border-purple-500">
+                                            <p><span class="text-yellow-500">User:</span> "초반 농장 씬이 너무 길더라"</p>
+                                            <p><span class="text-green-500">AI:</span> "맞아요, 그 부분 지적하는 분들 많더라고요. '1시간이 지루했다'는 리뷰도 있었어요. 근데 '그 시간이 필요했다'는 의견도 있더라고요. 혹시 결말은 어땠어요?"</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-gray-700 flex justify-between text-xs text-gray-500">
+                                        <span>Used in: Movie Discussion (V3.0)</span>
+                                        <span>Data: 79 movies, 444 reviews</span>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+                    <!-- End of Detailed Content -->
+                    
+                    <!-- Demo Video Section -->
+                    <div class="bg-black p-8 text-center">
+                        <h3 class="text-white text-xl font-bold mb-6">Watch Demo Video</h3>
+                        <div class="max-w-3xl mx-auto rounded-lg overflow-hidden border border-gray-700 shadow-2xl">
+                             <video controls class="w-full">
+                                <source src="./video/demo.mp4" type="video/mp4">
+                                브라우저가 동영상을 지원하지 않습니다.
+                            </video>
                         </div>
                     </div>
 
                 </div>
+                <!-- End of MovieTalk Card -->
+
             </div>
         </section>
 
         <!-- ========== CONTACT ========== -->
-        <section id="contact" class="py-24 sm:py-32 bg-gradient-to-br from-indigo-600 to-purple-700 text-white">
-            <div class="container mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-4xl font-extrabold tracking-tight sm:text-5xl font-noto">
-                    Contact
+        <section id="contact" class="py-24 bg-white border-t border-gray-100">
+            <div class="container mx-auto max-w-4xl px-4 text-center">
+                <span class="inline-block p-3 rounded-full bg-indigo-50 text-indigo-600 mb-4">
+                    <i data-lucide="send" class="h-6 w-6"></i>
+                </span>
+                <h2 class="text-4xl font-bold text-gray-900 font-noto mb-6">
+                    함께 일할 준비가 되셨나요?
                 </h2>
-                <p class="mt-6 text-xl text-indigo-100 font-noto">
-                    프로젝트 문의 및 협업 제안을 기다립니다.
+                <p class="text-xl text-gray-600 mb-10 font-noto">
+                    새로운 기술에 도전하고, 문제를 해결하는 것을 즐깁니다.<br>
+                    프로젝트 문의나 커피챗 제안은 언제든 환영합니다.
                 </p>
-                <p class="text-xl text-indigo-100 font-noto">
-                    아래 링크를 통해 편하게 연락주세요.
-                </p>
-                <div class="mt-12 flex flex-col sm:flex-row sm:justify-center sm:space-x-6 space-y-4 sm:space-y-0">
-                    <a href="https://github.com/yoon1017" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center rounded-md border border-transparent bg-white px-8 py-3 text-base font-medium text-indigo-600 shadow-lg hover:bg-indigo-50 transition-colors">
-                        <i data-lucide="github" class="mr-2 h-5 w-5"></i>
-                        GitHub
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="mailto:booohooo20@gmail.com" class="flex items-center justify-center px-8 py-4 bg-gray-900 text-white rounded-lg font-bold hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1">
+                        <i data-lucide="mail" class="mr-2 h-5 w-5"></i> Email Me
                     </a>
-                    <a href="mailto:booohooo20@gmail.com" class="inline-flex items-center justify-center rounded-md border border-white/50 bg-white/10 px-8 py-3 text-base font-medium text-white backdrop-blur-sm hover:bg-white/20 transition-colors">
-                        <i data-lucide="mail" class="mr-2 h-5 w-5"></i>
-                        Email
+                    <a href="https://github.com/yoon1017" target="_blank" class="flex items-center justify-center px-8 py-4 bg-white text-gray-900 border border-gray-200 rounded-lg font-bold hover:bg-gray-50 transition-all shadow-md hover:-translate-y-1">
+                        <i data-lucide="github" class="mr-2 h-5 w-5"></i> GitHub
                     </a>
                 </div>
             </div>
@@ -445,90 +559,56 @@
     </main>
 
     <!-- ========== FOOTER ========== -->
-    <footer class="bg-gray-800 text-gray-400">
-        <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-center">
-            <p>&copy; 2024 Yoon DongJun (YoonDev). All rights reserved.</p>
+    <footer class="bg-gray-50 border-t border-gray-200 py-12">
+        <div class="container mx-auto max-w-7xl px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="text-gray-400 hover:text-gray-600"><i data-lucide="github" class="h-6 w-6"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600"><i data-lucide="linkedin" class="h-6 w-6"></i></a>
+                <a href="#" class="text-gray-400 hover:text-gray-600"><i data-lucide="instagram" class="h-6 w-6"></i></a>
+            </div>
+            <p class="text-gray-500 text-sm font-noto">
+                &copy; 2025 Yoon DongJun. All rights reserved.<br>
+                Designed with Tailwind CSS & Passion.
+            </p>
         </div>
     </footer>
 
-    <!-- CSS (Skill Badges, Tech Tags) -->
+    <!-- CSS Helpers for this file -->
     <style>
-        .skill-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px; /* rounded-full */
-            font-size: 0.9rem;
-            font-weight: 500;
-            background-color: #EEF2FF; /* indigo-50 */
-            color: #4338CA; /* indigo-700 */
-            border: 1px solid #C7D2FE; /* indigo-200 */
-        }
         .tech-tag {
             display: inline-flex;
             align-items: center;
-            padding: 0.35rem 0.85rem;
-            border-radius: 9999px; /* rounded-full */
-            font-size: 0.8rem;
-            font-weight: 500;
-            background-color: #F3F4F6; /* gray-100 */
-            color: #4B5563; /* gray-600 */
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background-color: #F3F4F6;
+            color: #4B5563;
+            border: 1px solid #E5E7EB;
         }
     </style>
 
     <!-- JavaScript -->
     <script>
-        // Lucide 아이콘 초기화
         lucide.createIcons();
 
-        // 모바일 메뉴 토글
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        menuBtn.addEventListener('click', () => {
-            const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-            menuBtn.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.classList.toggle('hidden');
-            
-            // 아이콘 변경 (menu <-> x)
-            const icon = menuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.setAttribute('data-lucide', 'menu');
-            } else {
-                icon.setAttribute('data-lucide', 'x');
-            }
-            lucide.createIcons(); // 아이콘 다시 렌더링
-        });
-
-        // 모바일 메뉴 링크 클릭 시 메뉴 닫기
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuBtn.setAttribute('aria-expanded', 'false');
-                menuBtn.querySelector('i').setAttribute('data-lucide', 'menu');
-                lucide.createIcons();
-            });
-        });
-
-        // 스크롤에 따른 네비게이션 활성화
+        // 네비게이션 스크롤 인터랙션
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
 
         window.addEventListener('scroll', () => {
-            let currentSection = '';
-            
+            let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                // 현재 스크롤 위치가 섹션의 시작점(상단)보다 100px 위에 있을 때 활성화
-                if (window.scrollY >= sectionTop - 100) {
-                    currentSection = section.getAttribute('id');
+                if (scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('nav-link-active');
-                if (link.dataset.section === currentSection) {
+                if (link.dataset.section === current) {
                     link.classList.add('nav-link-active');
                 }
             });
